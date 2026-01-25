@@ -10,6 +10,7 @@ import {
 import { useSelector } from "react-redux";
 import Layout from "../layout";
 import Home from "./pages/homePage";
+import PatientsPage from "./pages/patientsPage";
 
 const ProtectedRoute = () => {
   const { user } = useSelector((state) => state.auth);
@@ -33,6 +34,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
+              <Route path="patients/*" element={<PatientsPage />} />
             </Route>
           </Route>
         </Routes>
