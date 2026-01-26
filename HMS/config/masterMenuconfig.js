@@ -10,11 +10,6 @@ export const masterMenuconfig = [
     icon: "",
     Children: [
       {
-        name: "Register Patient",
-        path: "/patients/register-patient",
-        icon: "",
-      },
-      {
         name: "View Patient",
         path: "/patients/view-patient",
         icon: "",
@@ -31,11 +26,6 @@ export const masterMenuconfig = [
     path: "/doctors",
     icon: "",
     Children: [
-      {
-        name: "Add Doctor",
-        path: "/add-doctor",
-        icon: "",
-      },
       {
         name: "View Doctor",
         path: "/view-doctor",

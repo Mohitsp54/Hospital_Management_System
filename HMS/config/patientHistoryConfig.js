@@ -1,0 +1,38 @@
+export const patientHistoryConfig = [
+  {
+    name: "patientId",
+    label: "Patient ID",
+    type: "text",
+    placeholder: "Enter Patient ID",
+    required: true,
+    showInForm: true,
+    showInTable: true,
+  },
+  {
+    name: "name",
+    label: "Name",
+    type: "text",
+    placeholder: "Enter full name",
+    required: true,
+    showInForm: true,
+    showInTable: true,
+  },
+  {
+    name: "assignedDoctor",
+    label: "Assigned Doctor",
+    type: "text",
+    placeholder: "Enter doctor name",
+    required: false,
+    showInForm: false,
+    showInTable: true,
+  },
+  {
+    name: "medicalHistory",
+    label: "Medical History",
+    type: "textarea",
+    placeholder: "Enter medical history",
+    required: false,
+    showInForm: true,
+    showInTable: true,
+  },
+];

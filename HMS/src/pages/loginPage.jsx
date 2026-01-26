@@ -18,7 +18,6 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (error) {
-      // Ideally show a toast, for now we rely on the error message below the form
       const timer = setTimeout(() => {
         dispatch(clearError());
       }, 3000);
@@ -119,7 +118,6 @@ const LoginPage = () => {
             />
           </div>
 
-          {/* Additional Options (Login only) */}
           {!isSignup && (
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center text-gray-400">
@@ -138,7 +136,6 @@ const LoginPage = () => {
             </div>
           )}
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
