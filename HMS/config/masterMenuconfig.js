@@ -28,12 +28,12 @@ export const masterMenuconfig = [
     Children: [
       {
         name: "View Doctor",
-        path: "/view-doctor",
+        path: "/doctors/view-doctor",
         icon: "",
       },
       {
         name: "Doctor Schedules",
-        path: "/doctor-schedules",
+        path: "/doctors/doctor-schedules",
         icon: "",
       },
     ],
@@ -45,17 +45,17 @@ export const masterMenuconfig = [
     Children: [
       {
         name: "Book Appointment",
-        path: "/book-appointment",
+        path: "/appointments/book-appointment",
         icon: "",
       },
       {
         name: "View Appointment",
-        path: "/view-appointment",
+        path: "/appointments/view-appointment",
         icon: "",
       },
       {
         name: "Cancelled Appointment",
-        path: "/cancelled-appointment",
+        path: "/appointments/cancelled-appointment",
         icon: "",
       },
     ],
@@ -67,12 +67,12 @@ export const masterMenuconfig = [
     Children: [
       {
         name: "Test Requests",
-        path: "/test-requests",
+        path: "/laboratory/test-requests",
         icon: "",
       },
       {
         name: "Test Reports",
-        path: "/test-reports",
+        path: "/laboratory/test-reports",
         icon: "",
       },
     ],
@@ -84,17 +84,17 @@ export const masterMenuconfig = [
     Children: [
       {
         name: "Admit Patient",
-        path: "/admit-patient",
+        path: "/ipd-management/admit-patient",
         icon: "",
       },
       {
         name: "Bed / Ward Management",
-        path: "/bed-ward-management",
+        path: "/ipd-management/bed-ward-management",
         icon: "",
       },
       {
         name: "Discharge Summary",
-        path: "/discharge-summary",
+        path: "/ipd-management/discharge-summary",
         icon: "",
       },
     ],
@@ -106,12 +106,12 @@ export const masterMenuconfig = [
     Children: [
       {
         name: "Medicine",
-        path: "/medicine",
+        path: "/pharmacy/medicine",
         icon: "",
       },
       {
         name: "Medicine Stock",
-        path: "/medicine-stock",
+        path: "/pharmacy/medicine-stock",
         icon: "",
       },
     ],
@@ -123,12 +123,12 @@ export const masterMenuconfig = [
     Children: [
       {
         name: "User Management",
-        path: "/user-management",
+        path: "/admin/user-management",
         icon: "",
       },
       {
         name: "Role Management",
-        path: "/role-management",
+        path: "/admin/role-management",
         icon: "",
       },
     ],

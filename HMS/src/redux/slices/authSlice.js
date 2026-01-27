@@ -51,6 +51,7 @@ const user = JSON.parse(localStorage.getItem("user"));
 const initialState = {
   user: user ? user : null,
   token: user ? user.token : null,
+  permissions: user ? user.permissions : [],
   loading: false,
   error: null,
 };
@@ -63,6 +64,7 @@ const authSlice = createSlice({
       localStorage.removeItem("user");
       state.user = null;
       state.token = null;
+      state.permissions = [];
       state.error = null;
     },
     clearError: (state) => {
@@ -80,6 +82,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
         state.token = action.payload.token;
+        state.permissions = action.payload.permissions || [];
         localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(signupUser.rejected, (state, action) => {
@@ -97,6 +100,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
         state.token = action.payload.token;
+        state.permissions = action.payload.permissions || [];
         localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(loginUser.rejected, (state, action) => {

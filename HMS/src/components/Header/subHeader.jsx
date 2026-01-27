@@ -1,10 +1,10 @@
 import { IoMdPersonAdd } from "react-icons/io";
 import { RiExportFill } from "react-icons/ri";
 import { IoIosSearch } from "react-icons/io";
-const subHeader = ({ onAddClick }) => {
+const subHeader = ({ onAddClick, title = "Patients" }) => {
   return (
     <div className="flex justify-between items-center bg-linear-to-r from-purple-500 to-blue-300 h-12 px-4">
-      <h1 className="text-2xl font-semibold text-white">Patients</h1>
+      <h1 className="text-2xl font-semibold text-white">{title}</h1>
       <div className="h-8 w-90 bg-white rounded flex ">
         <input
           type="text"

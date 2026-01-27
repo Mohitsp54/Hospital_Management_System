@@ -17,6 +17,7 @@ const addPatient = async (req, res) => {
       bloodGroup,
       patientType,
       assignedDoctor,
+      medicalHistory,
     } = req.body;
 
     // Create new patient
@@ -97,6 +98,7 @@ const updatePatient = async (req, res) => {
       bloodGroup,
       patientType,
       assignedDoctor,
+      medicalHistory,
     } = req.body;
 
     const patient = await Patient.findById(req.params.id);

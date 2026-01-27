@@ -64,10 +64,18 @@ const login = async (req, res) => {
       user.lastLogin = new Date();
       await user.save();
 
+      // Fetch permissions based on user's role name
+      // Note: user.role is a String (e.g. "admin"), we need to find the Role document
+      const Role = require("../models/Role");
+      const roleDoc = await Role.findOne({ name: user.role });
+      const permissions = roleDoc ? roleDoc.permissions : [];
+
       res.json({
         _id: user.id,
         name: user.name,
         email: user.email,
+        role: user.role,
+        permissions: permissions,
         lastLogin: user.lastLogin,
         token: generateToken(user._id),
       });
@@ -80,7 +88,18 @@ const login = async (req, res) => {
   }
 };
 
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find().select("-password"); // Exclude password from result
+    res.status(200).json(users);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 module.exports = {
   signup,
   login,
+  getUsers,
 };

@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import Layout from "../layout";
 import Home from "./pages/homePage";
 import PatientsPage from "./pages/patientsPage";
+import AdminPage from "./pages/adminPage";
 
 const ProtectedRoute = () => {
   const { user } = useSelector((state) => state.auth);
@@ -30,11 +31,11 @@ function App() {
           <Route element={<PublicRoute />}>
             <Route path="/login" element={<LoginPage />} />
           </Route>
-
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="patients/*" element={<PatientsPage />} />
+              <Route path="admin/*" element={<AdminPage />} />
             </Route>
           </Route>
         </Routes>

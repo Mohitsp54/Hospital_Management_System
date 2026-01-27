@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SubHeader from "../components/Header/subHeader";
 import ViewPatients from "../components/Patients/viewPatients";
 import MedicalHistory from "../components/Patients/medicalHistory";
+import PatientMedicalHistoryDetail from "../components/Patients/PatientMedicalHistoryDetail";
 import DynamicForm from "../components/forms/dynamicform";
 import { patientFormConfig } from "../../config/patientFormConfig";
 import {
@@ -80,6 +81,8 @@ const PatientsPage = () => {
     content = <ViewPatients onEdit={handleEdit} onDelete={handleDelete} />;
   } else if (path.includes("patient-medical-history")) {
     content = <MedicalHistory />;
+  } else if (path.includes("history/")) {
+    content = <PatientMedicalHistoryDetail />;
   } else {
     content = (
       <div className="flex items-center justify-center h-full text-gray-500">

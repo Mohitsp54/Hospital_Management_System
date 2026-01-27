@@ -4,6 +4,9 @@ import { fetchPatients } from "../../redux/slices/patientSlice";
 import DynamicTable from "../table/dynamictable";
 import { patientHistoryConfig } from "../../../config/patientHistoryConfig";
 
+import { IoDocumentTextOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
+
 const MedicalHistory = () => {
   const dispatch = useDispatch();
   const { patients, total, page, limit, isLoading } = useSelector(
@@ -25,14 +28,22 @@ const MedicalHistory = () => {
   const tableColumns = patientHistoryConfig
     .filter((col) => col.showInTable !== false)
     .map((col) => {
-      // Add mapping if needed, e.g. if field names in config differ from DB
+      if (col.name === "medicalHistory") {
+        return {
+          ...col,
+          render: (row) => (
+            <Link
+              to={`/patients/history/${row._id}`}
+              className="text-blue-600 hover:text-blue-800"
+              title="View History"
+            >
+              <IoDocumentTextOutline size={24} />
+            </Link>
+          ),
+        };
+      }
       return col;
     });
-
-  // We might not need Edit/Delete actions here as it's a history view, or maybe we do?
-  // User asked for "similar table like viewPatients".
-  // ViewPatients has Edit/Delete.
-  // I'll leave onEdit/onDelete empty for now unless requested.
 
   return (
     <div className="h-full flex flex-col">

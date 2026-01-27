@@ -50,6 +50,8 @@ const DynamicTable = ({
     };
   }, []);
 
+  const visibleColumns = columns.filter((col) => col.showInTable !== false);
+
   return (
     <div className="flex flex-col h-full bg-white shadow rounded-lg overflow-hidden">
       {/* Table Container - Scrollable */}
@@ -57,7 +59,7 @@ const DynamicTable = ({
         <table className="min-w-full text-left text-sm whitespace-nowrap">
           <thead className="uppercase tracking-wider border-b-2 border-gray-200 bg-gray-50 sticky top-0 z-10">
             <tr>
-              {columns.map((col, index) => (
+              {visibleColumns.map((col, index) => (
                 <th
                   key={index}
                   scope="col"
@@ -78,12 +80,14 @@ const DynamicTable = ({
                   key={row._id}
                   className="hover:bg-gray-50 transition-colors"
                 >
-                  {columns.map((col, idx) => (
+                  {visibleColumns.map((col, idx) => (
                     <td key={idx} className="px-6 py-4 text-gray-700">
                       {/* Handle dates or nested properties if needed */}
-                      {col.type === "date" && row[col.name]
-                        ? new Date(row[col.name]).toLocaleDateString()
-                        : row[col.name]}
+                      {col.render
+                        ? col.render(row)
+                        : col.type === "date" && row[col.name]
+                          ? new Date(row[col.name]).toLocaleDateString()
+                          : row[col.name]}
                     </td>
                   ))}
                   {/* Action Column */}
@@ -133,7 +137,7 @@ const DynamicTable = ({
             ) : (
               <tr>
                 <td
-                  colSpan={columns.length + 1}
+                  colSpan={visibleColumns.length + 1}
                   className="px-6 py-10 text-center text-gray-500"
                 >
                   No records found
