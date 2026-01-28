@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const API_URL = "http://localhost:5000/api/roles";
+const API_URL = "/api/roles";
 
 export const fetchRoles = createAsyncThunk(
   "roles/fetchRoles",

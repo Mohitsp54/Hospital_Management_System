@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const API_URL = "http://localhost:5000/api/auth/users";
+const API_URL = "/api/auth/users";
 
 export const fetchUsers = createAsyncThunk(
   "users/fetchUsers",
@@ -22,7 +22,7 @@ export const addUser = createAsyncThunk(
   "users/addUser",
   async (userData, thunkAPI) => {
     try {
-      const response = await fetch("http://localhost:5000/api/users/add", {
+      const response = await fetch("/api/users/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export const updateUser = createAsyncThunk(
   "users/updateUser",
   async ({ id, userData }, thunkAPI) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/users/${id}`, {
+      const response = await fetch(`/api/users/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +66,7 @@ export const deleteUser = createAsyncThunk(
   "users/deleteUser",
   async (id, thunkAPI) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/users/${id}`, {
+      const response = await fetch(`/api/users/${id}`, {
         method: "DELETE",
       });
       const data = await response.json();

@@ -12,9 +12,7 @@ const PatientGenderChart = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:5000/api/patients/stats/gender",
-        );
+        const response = await fetch("/api/patients/stats/gender");
         const data = await response.json();
         if (response.ok) {
           setStats(data);
