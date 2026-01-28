@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
+const path = require("path");
 require("dotenv").config();
 
 // Connect to Database
@@ -18,8 +19,12 @@ app.use("/api/patients", require("./routes/patientRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/roles", require("./routes/roleRoutes"));
 
-app.get("/", (req, res) => {
-  res.send("Hospital Management System API is running...");
+// Serve frontend
+app.use(express.static(path.join(__dirname, "public")));
+
+// SPA Fallback
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 const PORT = process.env.PORT || 5000;
