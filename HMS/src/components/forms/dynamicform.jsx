@@ -6,10 +6,8 @@ const PermissionTree = ({ options, selected, onChange }) => {
     let newSelected = [...selected];
     const isSelected = newSelected.includes(path);
 
-    // Toggle current path
     if (isSelected) {
       newSelected = newSelected.filter((p) => p !== path);
-      // Deselect all children
       const removeChildren = (items) => {
         items?.forEach((child) => {
           newSelected = newSelected.filter((p) => p !== child.path);
@@ -19,7 +17,6 @@ const PermissionTree = ({ options, selected, onChange }) => {
       if (children) removeChildren(children);
     } else {
       newSelected.push(path);
-      // Select all children
       const addChildren = (items) => {
         items?.forEach((child) => {
           if (!newSelected.includes(child.path)) newSelected.push(child.path);
@@ -29,19 +26,12 @@ const PermissionTree = ({ options, selected, onChange }) => {
       if (children) addChildren(children);
     }
 
-    // Handle "Child selects Parent" logic bottom-up
-    // We need to re-evaluate the entire tree to ensure parents are selected if any child is selected.
-
-    // Create a map or helper to find parents. Since we have the tree structure in `options`,
-    // we can traverse it to enforce the rule: If any child is in `newSelected`, parent MUST be in `newSelected`.
-
     const enforceParentSelection = (items, currentSelection) => {
       let updatedSelection = [...currentSelection];
 
       const checkNode = (node) => {
         let childSelected = false;
 
-        // DFS to check children first
         if (node.Children && node.Children.length > 0) {
           node.Children.forEach((child) => {
             if (checkNode(child)) {
@@ -50,7 +40,6 @@ const PermissionTree = ({ options, selected, onChange }) => {
           });
         }
 
-        // If current node is explicitly selected, or any child is selected, this node should be selected
         if (updatedSelection.includes(node.path) || childSelected) {
           if (!updatedSelection.includes(node.path)) {
             updatedSelection.push(node.path);

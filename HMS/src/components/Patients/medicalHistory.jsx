@@ -58,7 +58,6 @@ const MedicalHistory = () => {
         itemsPerPage={limit}
         onPageChange={handlePageChange}
         onLimitChange={handleLimitChange}
-        // onEdit and onDelete not passed, so actions might not show or show no-op
       />
     </div>
   );

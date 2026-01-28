@@ -1,9 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 
-// @desc    Add a new user (Admin function)
-// @route   POST /api/users/add
-// @access  Private/Admin
 const addUser = async (req, res) => {
   const { name, email, password, role } = req.body;
 
@@ -12,18 +9,15 @@ const addUser = async (req, res) => {
       return res.status(400).json({ message: "Please add all fields" });
     }
 
-    // Check if user exists
     const userExists = await User.findOne({ email });
 
     if (userExists) {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create user
     const user = await User.create({
       name,
       email,
@@ -49,9 +43,6 @@ const addUser = async (req, res) => {
   }
 };
 
-// @desc    Update user
-// @route   PUT /api/users/:id
-// @access  Private/Admin
 const updateUser = async (req, res) => {
   const { name, email, password, role } = req.body;
 
@@ -86,9 +77,6 @@ const updateUser = async (req, res) => {
   }
 };
 
-// @desc    Delete user
-// @route   DELETE /api/users/:id
-// @access  Private/Admin
 const deleteUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);

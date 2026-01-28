@@ -16,18 +16,14 @@ const signup = async (req, res) => {
       return res.status(400).json({ message: "Please add all fields" });
     }
 
-    // Check if user exists
     const userExists = await User.findOne({ email });
 
     if (userExists) {
       return res.status(400).json({ message: "User already exists" });
     }
-
-    // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create user
     const user = await User.create({
       name,
       email,
@@ -56,16 +52,12 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Check for user email
     const user = await User.findOne({ email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
-      // Update last login
       user.lastLogin = new Date();
       await user.save();
 
-      // Fetch permissions based on user's role name
-      // Note: user.role is a String (e.g. "admin"), we need to find the Role document
       const Role = require("../models/Role");
       const roleDoc = await Role.findOne({ name: user.role });
       const permissions = roleDoc ? roleDoc.permissions : [];
@@ -90,7 +82,7 @@ const login = async (req, res) => {
 
 const getUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password"); // Exclude password from result
+    const users = await User.find().select("-password");
     res.status(200).json(users);
   } catch (error) {
     console.error("Error fetching users:", error);

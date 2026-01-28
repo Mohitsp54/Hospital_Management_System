@@ -1,8 +1,5 @@
 const Role = require("../models/Role");
 
-// @desc    Get all roles
-// @route   GET /api/roles
-// @access  Private/Admin
 const getRoles = async (req, res) => {
   try {
     const roles = await Role.find();
@@ -13,9 +10,6 @@ const getRoles = async (req, res) => {
   }
 };
 
-// @desc    Add a new role
-// @route   POST /api/roles
-// @access  Private/Admin
 const addRole = async (req, res) => {
   const { name, permissions } = req.body;
 
@@ -41,9 +35,6 @@ const addRole = async (req, res) => {
   }
 };
 
-// @desc    Update role
-// @route   PUT /api/roles/:id
-// @access  Private/Admin
 const updateRole = async (req, res) => {
   const { name, permissions } = req.body;
 
@@ -64,9 +55,6 @@ const updateRole = async (req, res) => {
   }
 };
 
-// @desc    Delete role
-// @route   DELETE /api/roles/:id
-// @access  Private/Admin
 const deleteRole = async (req, res) => {
   try {
     const role = await Role.findById(req.params.id);

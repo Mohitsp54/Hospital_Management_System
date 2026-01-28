@@ -63,8 +63,8 @@ const PatientsPage = () => {
   const handleEdit = (patient) => {
     const formPatient = {
       ...patient,
-      mobileString: patient.mobileNumber, // Map DB field to Form field
-      dob: patient.dob ? new Date(patient.dob).toISOString().split("T")[0] : "", // Format Date
+      mobileString: patient.mobileNumber,
+      dob: patient.dob ? new Date(patient.dob).toISOString().split("T")[0] : "",
     };
     setEditingPatient(formPatient);
     setShowAddPatientForm(true);

@@ -28,14 +28,9 @@ const AdminPage = () => {
     dispatch(fetchRoles());
   }, [dispatch]);
 
-  // Determine active config and action based on path
-  // Use useMemo to avoid recreating config on every render, but ensure it updates when roles change
   const activeConfig = useMemo(() => {
     if (path.includes("user-management")) {
-      // Clone config to avoid mutating original
       const config = userManagementConfig.map((field) => ({ ...field }));
-
-      // Update role options dynamically
       const roleField = config.find((f) => f.name === "role");
       if (roleField) {
         roleField.options = roles.map((role) => ({
@@ -66,7 +61,7 @@ const AdminPage = () => {
         userId: item._id,
       };
     } else if (path.includes("role-management")) {
-      // Role specific mapping if needed
+    
     }
     setEditingItem(formData);
     setShowAddForm(true);

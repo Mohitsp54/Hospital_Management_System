@@ -14,7 +14,7 @@ const RoleManagement = ({ onEdit, onDelete }) => {
 
   const tableData = roles.map((role) => ({
     ...role,
-    userId: role._id, // Mapping _id to userId if strictly required by table key logic, though table might use _id
+    userId: role._id,
   }));
 
   return (

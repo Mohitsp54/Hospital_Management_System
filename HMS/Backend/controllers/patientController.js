@@ -1,8 +1,5 @@
 const Patient = require("../models/Patient");
 
-// @desc    Add a new patient
-// @route   POST /api/patients/add
-// @access  Public (for now)
 const addPatient = async (req, res) => {
   try {
     const {
@@ -20,12 +17,11 @@ const addPatient = async (req, res) => {
       medicalHistory,
     } = req.body;
 
-    // Create new patient
     const patient = await Patient.create({
       patientId,
       name,
       email,
-      mobileNumber: mobileString, // Mapping mobileString from frontend to mobileNumber in DB
+      mobileNumber: mobileString,
       address,
       gender,
       dob,
@@ -52,9 +48,6 @@ const addPatient = async (req, res) => {
   }
 };
 
-// @desc    Get all patients with pagination
-// @route   GET /api/patients
-// @access  Public
 const getPatients = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -62,7 +55,7 @@ const getPatients = async (req, res) => {
     const skip = (page - 1) * limit;
 
     const patients = await Patient.find()
-      .sort({ registrationDate: -1 }) // Newest first
+      .sort({ registrationDate: -1 })
       .skip(skip)
       .limit(limit);
 
@@ -81,9 +74,6 @@ const getPatients = async (req, res) => {
   }
 };
 
-// @desc    Update patient details
-// @route   PUT /api/patients/:id
-// @access  Public
 const updatePatient = async (req, res) => {
   try {
     const {
@@ -134,9 +124,6 @@ const updatePatient = async (req, res) => {
   }
 };
 
-// @desc    Delete a patient
-// @route   DELETE /api/patients/:id
-// @access  Public
 const deletePatient = async (req, res) => {
   try {
     const patient = await Patient.findById(req.params.id);
@@ -155,9 +142,45 @@ const deletePatient = async (req, res) => {
   }
 };
 
+const getPatientGenderStats = async (req, res) => {
+  try {
+    const stats = await Patient.aggregate([
+      {
+        $group: {
+          _id: { $toLower: "$gender" },
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+
+    const genderStats = {
+      male: 0,
+      female: 0,
+      other: 0,
+      total: 0,
+    };
+
+    stats.forEach((stat) => {
+      const gender = stat._id;
+      if (gender === "male") genderStats.male = stat.count;
+      else if (gender === "female") genderStats.female = stat.count;
+      else genderStats.other += stat.count;
+    });
+
+    genderStats.total =
+      genderStats.male + genderStats.female + genderStats.other;
+
+    res.status(200).json(genderStats);
+  } catch (error) {
+    console.error("Error fetching gender stats:", error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
 module.exports = {
   addPatient,
   getPatients,
   updatePatient,
   deletePatient,
+  getPatientGenderStats,
 };
