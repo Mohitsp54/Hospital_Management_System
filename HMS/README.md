@@ -119,11 +119,3 @@ docker-compose up --build
 - **MongoDB**: `mongodb://localhost:27017`
 
 ---
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📄 License
-
-This project is licensed under the ISC License.
